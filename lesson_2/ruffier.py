@@ -86,4 +86,3 @@ def test(P1: int, P2: int, P3: int, age: int) -> str:
     instr = txt_res[idx_instr]
 
     return f"{txt_index} {round(r_index, 2)}\n{txt_workheart}{instr}"
-

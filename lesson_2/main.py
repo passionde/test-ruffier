@@ -144,7 +144,10 @@ class Result(Screen):
         self.outer.add_widget(self.instr)
 
         self.add_widget(self.outer)
-        # ToDo: перезагрузка метода on_enter, методом before (instr.text = name + '\n' + test(p1, p2, p3, age))
+        self.on_enter = self.before
+
+    def before(self):
+        self.instr.text = f"{name}\n{test(p1, p2, p3, age)}"
 
 
 class HeartCheck(App):
