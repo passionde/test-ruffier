@@ -30,40 +30,60 @@ txt_index = "Ваш индекс Руфье: "
 txt_workheart = "Работоспособность сердца: "
 txt_nodata = '''
 нет данных для такого возраста'''
-txt_res = []
-txt_res.append('''низкая. 
-Срочно обратитесь к врачу!''')
-txt_res.append('''удовлетворительная. 
-Обратитесь к врачу!''')
-txt_res.append('''средняя. 
-Возможно, стоит дополнительно обследоваться у врача.''')
-txt_res.append('''
-выше среднего''')
-txt_res.append('''
-высокая''')
+txt_res = ['''низкая. 
+Срочно обратитесь к врачу!''', '''удовлетворительная. 
+Обратитесь к врачу!''', '''средняя. 
+Возможно, стоит дополнительно обследоваться у врача.''', '''
+выше среднего''', '''
+высокая''']
 
 
 def ruffier_index(P1: int, P2: int, P3: int) -> float:
     """ возвращает значение индекса по трем показателям пульса для сверки с таблицей"""
-    pass
+    return (4 * sum([P1, P2, P3]) - 200) / 10
 
 
 def neud_level(age: int) -> float:
     """ варианты с возрастом меньше 7 и взрослым надо обрабатывать отдельно,
     здесь подбираем уровень "неуд" только внутри таблицы:
     в возрасте 7 лет "неуд" - это индекс 21, дальше каждые 2 года он понижается на 1.5 до значения 15 в 15-16 лет """
-    pass
+    norm_age = (min(age, 15) - 7) // 2
+    result = 21 - norm_age * 1.5
+    return result
 
 
 def ruffier_result(r_index: float, level: float):
     """ функция получает индекс Руфье и интерпретирует его,
     возвращает уровень готовности: число от 0 до 4
     (чем выше уровень готовности, тем лучше).  """
-    pass
+    if r_index >= level:
+        return 0
+    level = level - 4
+
+    if r_index >= level:
+        return 1
+    level = level - 5
+
+    if r_index >= level:
+        return 2
+    level = level - 5.5
+
+    if r_index >= level:
+        return 3
+    return 4
 
 
 def test(P1: int, P2: int, P3: int, age: int) -> str:
     """ эту функцию можно использовать снаружи модуля для подсчетов индекса Руфье.
     Возвращает готовые тексты, которые остается нарисовать в нужном месте
     Использует для текстов константы, заданные в начале этого модуля. """
-    pass
+    if age < 7:
+        return txt_nodata
+
+    r_index = ruffier_index(P1, P2, P3)
+    level = neud_level(age)
+    idx_instr = ruffier_result(r_index, level)
+    instr = txt_res[idx_instr]
+
+    return f"{txt_index} {round(r_index, 2)}\n{txt_workheart}{instr}"
+

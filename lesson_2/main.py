@@ -10,7 +10,7 @@ from kivy.uix.scrollview import ScrollView
 from instructions import txt_instruction, txt_test1, txt_test2, txt_test3, txt_sits
 from ruffier import test
 
-# ToDo: определить глобальные переменные
+name, age, p1, p2, p3 = "", 0, 0, 0, 0
 
 
 class InstrScr(Screen):
@@ -43,7 +43,9 @@ class InstrScr(Screen):
         self.add_widget(outer)
 
     def next(self):
-        # ToDo: запись данных в глобальные переменные
+        global name, age
+        name = self.in_name.text
+        age = int(self.in_age.text)  # !error, возможна ошибка
         self.manager.current = 'pulse1'
 
 
@@ -71,7 +73,8 @@ class PulseScr(Screen):
         self.add_widget(outer)
 
     def next(self):
-        # ToDo: запись данных в глобальные переменные
+        global p1
+        p1 = int(self.in_result.text)
         self.manager.current = 'sits'
 
 
@@ -126,7 +129,9 @@ class PulseScr2(Screen):
         self.add_widget(outer)
 
     def next(self):
-        # ToDo: запись данных в глобальные переменные
+        global p2, p3
+        p2 = int(self.in_result1.text)
+        p3 = int(self.in_result2.text)
         self.manager.current = 'result'
 
 
