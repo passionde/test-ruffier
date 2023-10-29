@@ -18,7 +18,7 @@ class MyInput(TextInput):
         self.bind(text=self.changevalue)
     
     def changevalue(self, widget, value):
-        self.mytext = "".join(reversed(self.text))
+        self.mytext = "-".join(reversed(self.text))
 
 class MyBox(BoxLayout):
     def __init__(self, **kwargs):

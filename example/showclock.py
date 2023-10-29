@@ -10,7 +10,7 @@ from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 from kivy.clock import Clock
 
-time_to_read = 5
+time_to_read = 2
 long_txt = """Используйте эти советы, чтобы увеличить скорость чтения:\n
 1. Не проговаривайте читаемый текст.\n
 Если привычка проговаривать уже есть, тренируйтесь читать и одновременно пропевайте с закрытыми губами одну ноту.\n 
