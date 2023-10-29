@@ -85,8 +85,12 @@ class PulseScr(Screen):
 
     def next(self):
         global p1
-        p1 = int(self.in_result.text)
-        self.manager.current = 'sits'
+        p1 = check_int(self.in_result.text)
+        if p1 == False or p1 <= 0:
+            p1 = 0
+            self.in_result.text = "Неверные данные"
+        else:
+            self.manager.current = 'sits'
 
 
 class CheckSits(Screen):
@@ -141,9 +145,17 @@ class PulseScr2(Screen):
 
     def next(self):
         global p2, p3
-        p2 = int(self.in_result1.text)
-        p3 = int(self.in_result2.text)
-        self.manager.current = 'result'
+        p2 = check_int(self.in_result1.text)
+        p3 = check_int(self.in_result2.text)
+
+        if p2 == False or p2 <= 0:
+            p2 = 0
+            self.in_result1.text = "Неверные данные"
+        elif p3 == False or p3 <= 0:
+            p3 = 0
+            self.in_result2.text = "Неверные данные"
+        else:
+            self.manager.current = 'result'
 
 
 class Result(Screen):
